@@ -13,8 +13,14 @@ const UserSchema = new Schema({
     },
     required: [true, 'Name is required.']
   },
-  postCount: Number,
   posts: [PostSchema]
+});
+
+//Calling virtual tells userschema to expect a virtual property
+//Use function literal instead of arrow func because an arrow func would refer
+// this entire file. The function literal refers to UserSchema
+UserSchema.virtual('postCount').get(function() {
+  return this.posts.length;
 });
 
 //Notes
