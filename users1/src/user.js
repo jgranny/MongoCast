@@ -4,11 +4,12 @@ const Schema = mongoose.Schema;
 
 //----------Create User Schema----------//
 const UserSchema = new Schema({
-  name: String
+  name: String,
+  postCount: Number
 });
 
 //Notes
-  // ln 7 create name attribute and expect it to be of type String (String is native to JS)
+  // ln (name: String) create name attribute and expect it to be of type String (String is native to JS)
 
 //----------Create User Model----------//
 const User = mongoose.model('user', UserSchema);
