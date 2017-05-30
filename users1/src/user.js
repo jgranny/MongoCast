@@ -13,7 +13,14 @@ const UserSchema = new Schema({
     },
     required: [true, 'Name is required.']
   },
-  posts: [PostSchema]
+  //Ex 1 of option for posts
+  posts: [PostSchema],
+  likes: Number,
+  //Ex 2 of option for posts
+  blogPosts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'blogPost'
+  }]
 });
 
 //Calling virtual tells userschema to expect a virtual property

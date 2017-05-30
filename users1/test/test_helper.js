@@ -25,10 +25,16 @@ before((done) => {
 //----------Empty out database after every test runs----------//
 beforeEach((done) => {
   //Take all records in users and delete them
-  mongoose.connection.collections.users.drop(() => {
-    // Ready to run the next test
-    //Done is a callback passed by mocha, it waits for the above code to run
-    // before moving on to the next test
-    done();
+  //Mongoose normalizes collection names, so blogPost is all lowercase 'blogpost' in this function
+  const { users, comments, blogposts } = mongoose.connection.collections;
+  users.drop(() => {
+    comments.drop(() => {
+      blogposts.drop(() => {
+        // Ready to run the next test
+        //Done is a callback passed by mocha, it waits for the above code to run
+        // before moving on to the next test
+        done();
+      });
+    });
   });
-})
+});
