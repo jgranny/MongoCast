@@ -30,6 +30,18 @@ UserSchema.virtual('postCount').get(function() {
   return this.posts.length;
 });
 
+//Middleware
+// next tells mongoose to move on to the next middleware function or complete the task
+UserSchema.pre('remove', function(next) {
+  //Get access to the BlogPost model
+  const BlogPost = mongoose.model('blogPost');
+
+  // $in goes through all the blogposts looks at all the ids,
+  // if the id is in 'this.blogPosts', remove it
+  BlogPost.remove({ _id: { $in: this.blogPosts } })
+    .then(() => next());
+});
+
 //Notes
   // ln (name: String) create name attribute and expect it to be of type String (String is native to JS)
 
