@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const AlbumSchema = require('./album');
+
 const Schema = mongoose.Schema;
 
 const ArtistSchema = new Schema({
@@ -14,6 +15,9 @@ const ArtistSchema = new Schema({
   retired: Boolean,
   albums: [AlbumSchema]
 });
+
+//Since album is an imbedded item in the artist model, album it's self is not a
+// model, it is only a schema
 
 const Artist = mongoose.model('artist', ArtistSchema);
 
