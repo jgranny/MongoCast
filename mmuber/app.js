@@ -6,7 +6,9 @@ const app = express();
 
 //Calling promise fixes deprecation warning
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/mmuber');
+if (process.env.NODE_ENV !== 'test') {
+  mongoose.connect('mongodb://localhost/mmuber');
+}
 
 //Invoke json
 //The bodyParser call must be above the routes call
